@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Catálogo de Películas</h1>
+
+<div class="grid-peliculas">
+    {% for pelicula in peliculas %}
+    <div class="tarjeta-pelicula">
+        <img src="{{ pelicula.poster or 'https://via.placeholder.com/300x450' }}" alt="{{ pelicula.title }}">
+        <h3>{{ pelicula.title }}</h3>
+        <p>Año: {{ pelicula.year }}</p>
+        <div class="acciones">
+            <a href="{{ url_for('mostrar_detalle', id=pelicula['id']) }}" class="boton">Detalles</a>
+            <a href="{{ url_for('mostrar_editor', id=pelicula['id']) }}" class="boton">Editar</a>
+            <a href="{{ url_for('eliminar_pelicula', id=pelicula['id']) }}" class="boton peligro">Eliminar</a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

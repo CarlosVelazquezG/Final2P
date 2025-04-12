@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="detalle-pelicula">
+    <img src="{{ pelicula.poster }}" alt="{{ pelicula.title }}">
+    <h2>{{ pelicula.title }}</h2>
+    <p><strong>Género:</strong> {{ pelicula.genre }}</p>
+    <p><strong>Año:</strong> {{ pelicula.year }}</p>
+    <p><strong>Clasificación:</strong> {{ pelicula.clss }}</p>
+    <a href="{{ url_for('mostrar_catalogo') }}" class="boton">Volver</a>
+</div>
+{% endblock %}

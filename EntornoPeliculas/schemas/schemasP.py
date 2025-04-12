@@ -7,4 +7,5 @@ class PeliculaCreate(BaseModel):
     year: int = Field(..., ge=1000, le=9999)
     clss: str = Field(..., min_length=1, max_length=1)
 
-
+class PeliculaResponse(PeliculaCreate):
+    id: int
