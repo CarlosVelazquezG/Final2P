@@ -1,29 +1,67 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h2>{% if pelicula %}Editar{% else %}Nueva{% endif %} Película</h2>
-
-<form method="POST" action="{% if pelicula %}{{ url_for('guardar_pelicula', id=pelicula['id']) }}{% else %}{{ url_for('guardar_pelicula') }}{% endif %}">
-    <div class="form-group">
-        <label>Título:</label>
-        <input type="text" name="title" value="{{ pelicula.title if pelicula }}" required>
+<div class="container">
+    <div class="contenedor-editor">
+        <h2 class="titulo-editor">
+            {% if pelicula %}Editando: {{ pelicula.title }}{% else %}Nueva Película{% endif %}
+        </h2>
+        
+        <!-- Formulario corregido -->
+        <form method="POST" action="{% if pelicula %}{{ url_for('guardar_pelicula', id=pelicula['id']) }}{% else %}{{ url_for('guardar_pelicula') }}{% endif %}">
+            <div class="grupo-formulario">
+                <label>Título:</label>
+                <input 
+                    type="text" 
+                    name="title" 
+                    value="{{ pelicula.title if pelicula }}" 
+                    required
+                    class="input-estilizado"
+                >
+            </div>
+            
+            <div class="grupo-formulario">
+                <label>Género:</label>
+                <input 
+                    type="text" 
+                    name="genre" 
+                    value="{{ pelicula.genre if pelicula }}" 
+                    required
+                    class="input-estilizado"
+                >
+            </div>
+            
+            <div class="grupo-formulario">
+                <label>Año:</label>
+                <input 
+                    type="number" 
+                    name="year" 
+                    value="{{ pelicula.year if pelicula }}" 
+                    min="1900" 
+                    max="2100" 
+                    required
+                    class="input-estilizado"
+                >
+            </div>
+            
+            <div class="grupo-formulario">
+                <label>Clasificación:</label>
+                <input 
+                    type="text" 
+                    name="clss" 
+                    value="{{ pelicula.clss if pelicula }}" 
+                    maxlength="1" 
+                    pattern="[A-Ca-c]"
+                    title="Solo A, B o C"
+                    required
+                    class="input-estilizado"
+                >
+            </div>
+            
+            <button type="submit" class="boton boton-guardar">
+                💾 {% if pelicula %}Actualizar{% else %}Crear{% endif %}
+            </button>
+        </form>
     </div>
-    
-    <div class="form-group">
-        <label>Género:</label>
-        <input type="text" name="genre" value="{{ pelicula.genre if pelicula }}" required>
-    </div>
-    
-    <div class="form-group">
-        <label>Año:</label>
-        <input type="number" name="year" value="{{ pelicula.year if pelicula }}" min="1900" max="2100" required>
-    </div>
-    
-    <div class="form-group">
-        <label>Clasificación:</label>
-        <input type="text" name="clss" value="{{ pelicula.clss if pelicula }}" maxlength="1" pattern="[A-C]" title="Solo A, B o C" required>
-    </div>
-    
-    <button type="submit" class="boton">Guardar</button>
-</form>
+</div>
 {% endblock %}

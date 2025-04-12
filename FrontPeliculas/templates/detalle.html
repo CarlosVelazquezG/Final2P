@@ -1,12 +1,37 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="detalle-pelicula">
-    <img src="{{ pelicula.poster }}" alt="{{ pelicula.title }}">
-    <h2>{{ pelicula.title }}</h2>
-    <p><strong>Género:</strong> {{ pelicula.genre }}</p>
-    <p><strong>Año:</strong> {{ pelicula.year }}</p>
-    <p><strong>Clasificación:</strong> {{ pelicula.clss }}</p>
-    <a href="{{ url_for('mostrar_catalogo') }}" class="boton">Volver</a>
+<div class="container">
+    <div class="tarjeta-detalle">
+        <div class="poster-detalle">
+            <img 
+                src="{{ pelicula.poster or 'https://via.placeholder.com/500x750?text=Poster+No+Disponible' }}" 
+                alt="{{ pelicula.title }}"
+                class="poster-grande"
+            >
+        </div>
+        
+        <div class="info-detalle">
+            <h1 class="titulo-detalle">{{ pelicula.title }}</h1>
+            
+            <div class="meta-info">
+                <span class="ano-detalle">{{ pelicula.year }}</span>
+                <span class="clasificacion-detalle">{{ pelicula.clss }}</span>
+                <span class="genero-detalle">{{ pelicula.genre }}</span>
+            </div>
+            
+            <div class="acciones-detalle">
+                <a href="{{ url_for('mostrar_editor', id=pelicula['id']) }}" class="boton boton-editar">
+                    <i class="fas fa-edit"></i> Editar
+                </a>
+                <a href="{{ url_for('eliminar_pelicula', id=pelicula['id']) }}" class="boton boton-eliminar">
+                    <i class="fas fa-trash-alt"></i> Eliminar
+                </a>
+                <a href="{{ url_for('mostrar_catalogo') }}" class="boton boton-volver">
+                    <i class="fas fa-arrow-left"></i> Volver
+                </a>
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock %}
