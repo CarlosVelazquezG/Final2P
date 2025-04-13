@@ -7,7 +7,7 @@ from DB.conexion import Session
 
 routerPeliculas = APIRouter()
 
-# 1. Crear una película
+# 1. Crear película
 @routerPeliculas.post("/peliculas", response_model=PeliculaResponse, tags=["Añadir pelicula"])
 def crear_pelicula(pelicula: PeliculaCreate):
     db = Session()
@@ -30,7 +30,7 @@ def obtener_peliculas():
     except SQLAlchemyError as e:
         raise HTTPException(status_code=500, detail=f"Error al obtener películas: {str(e)}")
 
-# 3. Obtener una película por ID
+# 3. Obtener película por ID
 @routerPeliculas.get("/peliculas/{id}", response_model=PeliculaResponse, tags=["Mostrar una pelicula"])
 def obtener_pelicula(id: int):
     db = Session()
@@ -42,7 +42,7 @@ def obtener_pelicula(id: int):
     except SQLAlchemyError as e:
         raise HTTPException(status_code=500, detail=f"Error al consultar película: {str(e)}")
 
-# 4. Actualizar una película
+# 4. Actualizar película
 @routerPeliculas.put("/peliculas/{id}", response_model=PeliculaResponse, tags=["Actualizar pelicula"])
 def actualizar_pelicula(id: int, datos: PeliculaCreate):
     db = Session()
@@ -59,7 +59,7 @@ def actualizar_pelicula(id: int, datos: PeliculaCreate):
         db.rollback()
         raise HTTPException(status_code=500, detail=f"Error al actualizar película: {str(e)}")
 
-# 5. Eliminar una película
+# 5. Eliminar película
 @routerPeliculas.delete("/peliculas/{id}", tags=["Eliminar pelicula"])
 def eliminar_pelicula(id: int):
     db = Session()

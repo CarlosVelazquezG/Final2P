@@ -2,10 +2,10 @@ from flask import Flask, render_template, request, redirect, url_for
 import requests
 
 app = Flask(__name__)
-API_URL = "http://127.0.0.1:5001"  # URL de tu API FastAPI
+API_URL = "http://127.0.0.1:5001"  
 TMDB_API_KEY = "9511ead905d790c2a81450ffeb3391eb"
 
-# Función para obtener imágenes de TMDB
+
 def obtener_poster(titulo):
     url = "https://api.themoviedb.org/3/search/movie"
     params = {
